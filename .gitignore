@@ -64,10 +64,18 @@ Thumbs.db
 /dist/
 /public/build/
 
+# Build and minification scripts
+minify*.ps1
+minify*.bat
+create-minified.ps1
+
 # Testing
 /coverage/
 .phpunit.result.cache
 /tests/coverage/
+test-*.html
+test_*.html
+sample_*.html
 
 # Temporary files
 *.tmp
@@ -94,6 +102,12 @@ access_log
 *.key
 *.crt
 *.csr
+
+# Development and configuration files
+user.ini
+manifest.json
+favicon.ico
+Parsedown.php
 
 # Database files
 *.sql
