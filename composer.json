@@ -1,7 +1,46 @@
 {
     "name": "guideai/special-education",
-    "description": "GuideAI Special Education Support System",
+    "description": "GuideAI Special Education Support System - Compassionate AI Support for Special Education Families",
+    "type": "project",
+    "keywords": ["special-education", "iep", "accessibility", "ai", "php", "bilingual"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "GuideAI Team",
+            "email": "support@guideai.org",
+            "homepage": "https://github.com/timenerd/Guide-Current"
+        }
+    ],
     "require": {
-        "erusev/parsedown": "*"
-    }
+        "php": ">=8.0",
+        "erusev/parsedown": "^1.7",
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "GuideAI\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GuideAI\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test-coverage": "phpunit --coverage-html coverage",
+        "cs-check": "phpcs --standard=PSR12 src/",
+        "cs-fix": "phpcbf --standard=PSR12 src/",
+        "security-check": "composer audit"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
