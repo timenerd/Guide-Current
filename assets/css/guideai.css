@@ -4919,4 +4919,65 @@ body {
     }
 }
 
+/* ===== MOBILE FIXES FOR GUIDEAI ===== */
+@media (max-width: 576px) {
+  /* Shrink and reposition floating accessibility button */
+  .accessibility-float-btn {
+    bottom: 20px !important;
+    top: auto !important;
+    left: auto !important;
+    right: 20px !important;
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+    z-index: 1050;
+  }
+
+  /* Resize drawer to full width on phones */
+  .accessibility-drawer {
+    width: 100vw !important;
+    left: -100vw !important;
+    border-radius: 0 !important;
+  }
+  .accessibility-drawer.open {
+    left: 0 !important;
+  }
+
+  /* Improve chat container responsiveness */
+  .chat-container {
+    height: auto;
+    max-height: calc(100vh - 200px);
+    min-height: 200px;
+    padding-bottom: 4rem;
+  }
+
+  /* Make input sticky at the bottom */
+  .input-box {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.75rem;
+    background-color: #ffffff;
+    border-top: 1px solid #ccc;
+    z-index: 1040;
+  }
+
+  /* Tighten chat message padding on mobile */
+  .chat-message {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Reduce header logo size */
+  .logo-img {
+    max-height: 50px;
+  }
+
+  #hero h1 {
+    font-size: 1.6rem;
+  }
+}
+
 /* ===== END: guideai.css ===== */
