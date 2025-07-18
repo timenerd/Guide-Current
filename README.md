@@ -188,6 +188,46 @@ class ResourceLinkingSystem {
 - `GET /api/language.php` - Language switching
 - `POST /api/translate.php` - Dynamic translation
 
+## 🚀 Quick Setup
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/timenerd/Guide-Current.git
+cd Guide-Current
+```
+
+### 2. Install Dependencies
+```bash
+composer install
+```
+
+### 3. Configure API Keys
+Copy the example configuration file and add your API keys:
+
+```bash
+cp config.example.php config.php
+```
+
+Edit `config.php` and add your actual API keys:
+- **Anthropic/Claude API Key**: Get from [Anthropic Console](https://console.anthropic.com/)
+- **OpenAI API Key**: Get from [OpenAI Platform](https://platform.openai.com/api-keys)
+- **Google Gemini API Key**: Get from [Google AI Studio](https://makersuite.google.com/app/apikey)
+
+### 4. Set Up Web Server
+Configure your web server to point to the project directory. For local development:
+- **XAMPP/WAMP/MAMP**: Place in `htdocs` folder
+- **PHP Built-in Server**: Run `php -S localhost:8000`
+
+### 5. Verify Installation
+Visit `http://localhost:8000` (or your configured URL) to see GuideAI in action.
+
+## ⚠️ Security Notes
+
+- **Never commit API keys** to version control
+- The `.gitignore` file is configured to exclude sensitive files
+- Use environment variables in production
+- Keep your API keys secure and rotate them regularly
+
 ### Configuration
 
 **📝 Environment Variables**
