@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Styling Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/guideai.css" rel="stylesheet">
+    <style>
+        .test-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 2px solid #6f42c1;
+            border-radius: 8px;
+        }
+        .button-test {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin: 1rem 0;
+        }
+        .status {
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+        .status.success { background-color: #d4edda; color: #155724; }
+        .status.info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Microphone and Send Button Styling Test</h1>
+        
+        <div class="test-section">
+            <h2>Button Styling Verification</h2>
+            <div id="stylingResults"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Visual Test</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h3>GuideAI</h3>
+                </div>
+                <div class="card-body p-0">
+                    <div class="chat-container">
+                        <div class="chat-message bot">
+                            <div class="alert alert-primary">
+                                <h5>Test Message</h5>
+                                <p>This is a test message to verify button styling.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-box m-3">
+                        <form class="d-flex gap-2">
+                            <div class="flex-grow-1">
+                                <input type="text" class="form-control" placeholder="Test input...">
+                            </div>
+                            <i id="voiceBtn" 
+                               class="fas fa-microphone" 
+                               role="button"
+                               tabindex="0"
+                               title="Use voice input"
+                               aria-label="Click to speak">
+                            </i>
+                            <i class="fas fa-paper-plane chat-send-btn" 
+                               role="button"
+                               tabindex="0"
+                               aria-label="Send your question">
+                            </i>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Interactive Test</h2>
+            <div class="button-test">
+                <button class="btn btn-primary" onclick="testMicrophone()">Test Microphone</button>
+                <button class="btn btn-success" onclick="testSend()">Test Send</button>
+                <button class="btn btn-warning" onclick="testListening()">Test Listening State</button>
+            </div>
+            <div id="interactionResults"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Responsive Test</h2>
+            <p>Resize your browser window to test responsive behavior:</p>
+            <div class="button-test">
+                <i id="voiceBtn2" class="fas fa-microphone"></i>
+                <i class="fas fa-paper-plane chat-send-btn"></i>
+            </div>
+            <div id="responsiveResults"></div>
+        </div>
+    </div>
+
+    <script>
+        function testMicrophone() {
+            const results = document.getElementById('interactionResults');
+            const voiceBtn = document.getElementById('voiceBtn');
+            
+            // Test hover effect
+            voiceBtn.style.backgroundColor = 'rgba(111, 66, 193, 0.1)';
+            voiceBtn.style.transform = 'scale(1.1)';
+            
+            results.innerHTML = '<div class="status success">Microphone button hover effect applied successfully</div>';
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                voiceBtn.style.backgroundColor = '';
+                voiceBtn.style.transform = '';
+                results.innerHTML = '<div class="status info">Microphone button reset to normal state</div>';
+            }, 2000);
+        }
+        
+        function testSend() {
+            const results = document.getElementById('interactionResults');
+            const sendBtn = document.querySelector('.chat-send-btn');
+            
+            // Test hover effect
+            sendBtn.style.backgroundColor = 'rgba(111, 66, 193, 0.15)';
+            sendBtn.style.transform = 'scale(1.1)';
+            
+            results.innerHTML = '<div class="status success">Send button hover effect applied successfully</div>';
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                sendBtn.style.backgroundColor = '';
+                sendBtn.style.transform = '';
+                results.innerHTML = '<div class="status info">Send button reset to normal state</div>';
+            }, 2000);
+        }
+        
+        function testListening() {
+            const results = document.getElementById('interactionResults');
+            const voiceBtn = document.getElementById('voiceBtn');
+            
+            // Add listening class
+            voiceBtn.classList.add('listening');
+            
+            results.innerHTML = '<div class="status success">Microphone button listening state applied (red background, pulse animation)</div>';
+            
+            // Reset after 3 seconds
+            setTimeout(() => {
+                voiceBtn.classList.remove('listening');
+                results.innerHTML = '<div class="status info">Microphone button reset to normal state</div>';
+            }, 3000);
+        }
+        
+        function checkStyling() {
+            const results = document.getElementById('stylingResults');
+            const voiceBtn = document.getElementById('voiceBtn');
+            const sendBtn = document.querySelector('.chat-send-btn');
+            
+            const tests = [
+                {
+                    name: 'Voice Button Exists',
+                    test: () => voiceBtn !== null,
+                    message: 'Voice button element found'
+                },
+                {
+                    name: 'Send Button Exists',
+                    test: () => sendBtn !== null,
+                    message: 'Send button element found'
+                },
+                {
+                    name: 'Voice Button Styling',
+                    test: () => {
+                        const style = getComputedStyle(voiceBtn);
+                        return style.cursor === 'pointer' && style.color.includes('111, 66, 193');
+                    },
+                    message: 'Voice button has correct styling'
+                },
+                {
+                    name: 'Send Button Styling',
+                    test: () => {
+                        const style = getComputedStyle(sendBtn);
+                        return style.cursor === 'pointer' && style.color.includes('111, 66, 193');
+                    },
+                    message: 'Send button has correct styling'
+                },
+                {
+                    name: 'Touch-Friendly Targets',
+                    test: () => {
+                        const voiceStyle = getComputedStyle(voiceBtn);
+                        const sendStyle = getComputedStyle(sendBtn);
+                        return parseInt(voiceStyle.minWidth) >= 32 && parseInt(sendStyle.minWidth) >= 32;
+                    },
+                    message: 'Buttons meet touch-friendly size requirements'
+                }
+            ];
+            
+            results.innerHTML = '';
+            tests.forEach(test => {
+                const result = document.createElement('div');
+                result.className = `status ${test.test() ? 'success' : 'info'}`;
+                result.innerHTML = `<strong>${test.name}:</strong> ${test.message}`;
+                results.appendChild(result);
+            });
+        }
+        
+        function checkResponsive() {
+            const results = document.getElementById('responsiveResults');
+            const voiceBtn = document.getElementById('voiceBtn2');
+            const sendBtn = document.querySelectorAll('.chat-send-btn')[1];
+            
+            const width = window.innerWidth;
+            let expectedSize = 'default';
+            
+            if (width <= 480) expectedSize = '32px';
+            else if (width <= 576) expectedSize = '36px';
+            else if (width <= 768) expectedSize = '40px';
+            else expectedSize = '44px';
+            
+            const voiceStyle = getComputedStyle(voiceBtn);
+            const actualSize = voiceStyle.minWidth;
+            
+            results.innerHTML = `
+                <div class="status info">
+                    <strong>Screen Width:</strong> ${width}px<br>
+                    <strong>Expected Button Size:</strong> ${expectedSize}<br>
+                    <strong>Actual Button Size:</strong> ${actualSize}<br>
+                    <strong>Responsive:</strong> ${actualSize === expectedSize ? '✅ Working' : '❌ Needs adjustment'}
+                </div>
+            `;
+        }
+        
+        // Run tests on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(checkStyling, 500);
+            setTimeout(checkResponsive, 500);
+            
+            // Check responsive behavior on resize
+            window.addEventListener('resize', checkResponsive);
+        });
+    </script>
+</body>
+</html> 

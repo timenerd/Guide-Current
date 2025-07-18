@@ -1,0 +1,332 @@
+/* Clean AI Response Styling - Professional and Accessible */
+
+/* Bot message container - Clean and simple */
+.bot-message {
+    background: #ffffff;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Message header - Minimal */
+.message-header {
+    margin-bottom: 8px;
+}
+
+.assistant-label {
+    color: #6f42c1;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+/* Message body - Clean typography */
+.message-body {
+    color: #2c3e50;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Welcome section - Simple */
+.welcome-section {
+    background: #f8f9fa;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+/* Response headers - Clean and readable */
+.response-header {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 20px 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.response-subheader {
+    color: #495057;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 16px 0 8px 0;
+    padding-left: 12px;
+    border-left: 3px solid #6f42c1;
+}
+
+/* Response paragraphs - Simple spacing */
+.response-paragraph {
+    margin: 12px 0;
+    line-height: 1.6;
+    color: #2c3e50;
+}
+
+/* Response text formatting - MINIMAL styling */
+.response-bold {
+    color: #2c3e50;
+    font-weight: 700;
+    /* No background, no padding, no shadows */
+}
+
+.response-italic {
+    color: #6c757d;
+    font-style: italic;
+    /* No background, no padding */
+}
+
+.response-code {
+    background: #f8f9fa;
+    color: #2c3e50;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    border: 1px solid #e1e8ed;
+}
+
+/* Response lists - Clean and simple */
+.response-list {
+    margin: 12px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.response-list-item {
+    margin: 6px 0;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #6f42c1;
+}
+
+.response-list-item::before {
+    content: '•';
+    color: #6f42c1;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+/* Nested list items - Subtle indentation */
+.response-list-item.nested {
+    margin-left: 16px;
+    background: #ffffff;
+    border-left: 2px solid #8e63d2;
+    font-size: 0.95rem;
+}
+
+.response-list-item.nested::before {
+    content: '◦';
+    color: #8e63d2;
+}
+
+/* Special terms - MINIMAL highlighting (no badges!) */
+.special-term {
+    color: #3f51b5;
+    font-weight: 600;
+    /* No background, no border, no shadow, no padding */
+}
+
+/* Phone numbers - Simple styling (no pill buttons!) */
+.phone-number {
+    color: #2e7d32;
+    font-weight: 600;
+    text-decoration: none;
+    /* No background, no border, no shadow, no padding */
+}
+
+.phone-number:hover {
+    text-decoration: underline;
+}
+
+/* Message time - Minimal */
+.message-time {
+    color: #6c757d;
+    font-size: 0.8rem;
+    margin-top: 8px;
+}
+
+/* Error messages - Simple */
+.bot-message.error {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Typing indicator - Simple animation */
+.typing-dots {
+    display: inline-block;
+}
+
+.typing-dots span {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #6c757d;
+    margin: 0 2px;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+.typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+    0%, 80%, 100% { opacity: 0.3; }
+    40% { opacity: 1; }
+}
+
+/* Simple entrance animation */
+.bot-message {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design - Simple adjustments */
+@media (max-width: 768px) {
+    .bot-message {
+        padding: 12px;
+        margin: 6px 0;
+    }
+    
+    .welcome-section {
+        padding: 12px;
+        margin: 12px 0;
+    }
+    
+    .response-header {
+        font-size: 1.2rem;
+        margin: 16px 0 10px 0;
+    }
+    
+    .response-subheader {
+        font-size: 1rem;
+        margin: 14px 0 8px 0;
+    }
+    
+    .response-list-item {
+        padding: 6px 10px;
+    }
+    
+    .response-list-item.nested {
+        margin-left: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .bot-message {
+        padding: 10px;
+        margin: 4px 0;
+    }
+    
+    .welcome-section {
+        padding: 10px;
+        margin: 10px 0;
+    }
+    
+    .response-header {
+        font-size: 1.1rem;
+        margin: 14px 0 8px 0;
+    }
+    
+    .response-subheader {
+        font-size: 0.95rem;
+        margin: 12px 0 6px 0;
+    }
+}
+
+/* Dark mode - Simple dark theme */
+@media (prefers-color-scheme: dark) {
+    .bot-message {
+        background: #744210;
+        border-color: #ff9800;
+        color: #e2e8f0;
+    }
+    
+    .welcome-section {
+        background: #2d3748;
+        border-color: #4a5568;
+    }
+    
+    .message-body {
+        color: #e2e8f0;
+    }
+    
+    .response-header {
+        color: #ffcc80;
+        border-bottom-color: #ff9800;
+    }
+    
+    .response-subheader {
+        color: #ffcc80;
+        border-left-color: #ff9800;
+    }
+    
+    .response-paragraph {
+        color: #e2e8f0;
+    }
+    
+    .response-bold {
+        color: #e2e8f0;
+    }
+    
+    .response-italic {
+        color: #a0aec0;
+    }
+    
+    .response-code {
+        background: #4a5568;
+        color: #e2e8f0;
+        border-color: #718096;
+    }
+    
+    .response-list-item {
+        background: #744210;
+        border-left-color: #ff9800;
+    }
+    
+    .response-list-item.nested {
+        background: #8b4513;
+        border-left-color: #ffb74d;
+    }
+    
+    .special-term {
+        color: #a78bfa;
+    }
+    
+    .phone-number {
+        color: #68d391;
+    }
+}
+
+/* Accessibility enhancements - Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+    .bot-message,
+    .typing-dots span {
+        animation: none;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .bot-message {
+        border-width: 2px;
+        border-color: #000000;
+    }
+    
+    .response-bold,
+    .special-term {
+        color: #000000;
+        font-weight: 900;
+    }
+    
+    .phone-number {
+        color: #000000;
+        font-weight: 900;
+    }
+} 

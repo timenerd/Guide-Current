@@ -1,0 +1,7 @@
+{
+    "name": "guideai/special-education",
+    "description": "GuideAI Special Education Support System",
+    "require": {
+        "erusev/parsedown": "*"
+    }
+}

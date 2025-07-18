@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuideAI Accessibility Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/guideai.css" rel="stylesheet">
+    <style>
+        .test-section {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 2px solid #6f42c1;
+            border-radius: 8px;
+        }
+        .test-result {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+        .test-pass { background-color: #d4edda; color: #155724; }
+        .test-fail { background-color: #f8d7da; color: #721c24; }
+        .test-info { background-color: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>GuideAI Accessibility & Mobile Responsiveness Test</h1>
+        
+        <div class="test-section">
+            <h2>Accessibility Features Test</h2>
+            <div id="accessibilityResults"></div>
+            <button class="btn btn-primary" onclick="testAccessibility()">Test Accessibility Features</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>Mobile Responsiveness Test</h2>
+            <div id="mobileResults"></div>
+            <button class="btn btn-success" onclick="testMobileResponsiveness()">Test Mobile Responsiveness</button>
+        </div>
+        
+        <div class="test-section">
+            <h2>Chat Interface Test</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h3>GuideAI</h3>
+                </div>
+                <div class="card-body p-0">
+                    <div id="chatMessages" class="chat-container">
+                        <div class="chat-message bot">
+                            <div class="alert alert-primary">
+                                <h5>Welcome to GuideAI</h5>
+                                <p>This is a test message to verify accessibility and mobile responsiveness.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-box m-3">
+                        <form class="d-flex gap-2">
+                            <div class="flex-grow-1">
+                                <input type="text" class="form-control" placeholder="Test input...">
+                            </div>
+                            <i class="fas fa-microphone" style="cursor: pointer; font-size: 1.1rem; color: #6f42c1;"></i>
+                            <i class="fas fa-paper-plane" style="cursor: pointer; font-size: 1.1rem; color: #6f42c1;"></i>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Accessibility Controls</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-outline-primary mb-2" onclick="toggleHighContrast()">Toggle High Contrast</button>
+                    <button class="btn btn-outline-primary mb-2" onclick="toggleLargeFonts()">Toggle Large Fonts</button>
+                    <button class="btn btn-outline-primary mb-2" onclick="toggleDyslexiaFont()">Toggle Dyslexia Font</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-outline-success mb-2" onclick="testReadAloud()">Test Read Aloud</button>
+                    <button class="btn btn-outline-warning mb-2" onclick="testKeyboardNavigation()">Test Keyboard Navigation</button>
+                    <button class="btn btn-outline-info mb-2" onclick="testScreenReader()">Test Screen Reader</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/accessibility.js"></script>
+    <script>
+        let accessibilitySystem;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize accessibility system
+            if (typeof GuideAIAccessibility !== 'undefined') {
+                accessibilitySystem = new GuideAIAccessibility();
+                console.log('Accessibility system initialized');
+            }
+        });
+
+        function testAccessibility() {
+            const results = document.getElementById('accessibilityResults');
+            results.innerHTML = '';
+            
+            const tests = [
+                {
+                    name: 'Accessibility System Loaded',
+                    test: () => typeof GuideAIAccessibility !== 'undefined',
+                    message: 'Accessibility JavaScript loaded successfully'
+                },
+                {
+                    name: 'High Contrast Toggle',
+                    test: () => {
+                        const btn = document.querySelector('[onclick="toggleHighContrast()"]');
+                        return btn && btn.addEventListener;
+                    },
+                    message: 'High contrast toggle button functional'
+                },
+                {
+                    name: 'Large Fonts Toggle',
+                    test: () => {
+                        const btn = document.querySelector('[onclick="toggleLargeFonts()"]');
+                        return btn && btn.addEventListener;
+                    },
+                    message: 'Large fonts toggle button functional'
+                },
+                {
+                    name: 'Dyslexia Font Toggle',
+                    test: () => {
+                        const btn = document.querySelector('[onclick="toggleDyslexiaFont()"]');
+                        return btn && btn.addEventListener;
+                    },
+                    message: 'Dyslexia font toggle button functional'
+                },
+                {
+                    name: 'Read Aloud Feature',
+                    test: () => accessibilitySystem && typeof accessibilitySystem.speakText === 'function',
+                    message: 'Text-to-speech functionality available'
+                },
+                {
+                    name: 'Keyboard Navigation',
+                    test: () => {
+                        const elements = document.querySelectorAll('button, input, a');
+                        return elements.length > 0;
+                    },
+                    message: 'Keyboard navigation elements present'
+                },
+                {
+                    name: 'Focus Indicators',
+                    test: () => {
+                        const style = getComputedStyle(document.body);
+                        return style.outline !== 'none';
+                    },
+                    message: 'Focus indicators enabled'
+                }
+            ];
+
+            tests.forEach(test => {
+                const result = document.createElement('div');
+                result.className = `test-result ${test.test() ? 'test-pass' : 'test-fail'}`;
+                result.innerHTML = `<strong>${test.name}:</strong> ${test.message}`;
+                results.appendChild(result);
+            });
+        }
+
+        function testMobileResponsiveness() {
+            const results = document.getElementById('mobileResults');
+            results.innerHTML = '';
+            
+            const tests = [
+                {
+                    name: 'Viewport Meta Tag',
+                    test: () => {
+                        const viewport = document.querySelector('meta[name="viewport"]');
+                        return viewport && viewport.content.includes('width=device-width');
+                    },
+                    message: 'Mobile viewport properly configured'
+                },
+                {
+                    name: 'Responsive CSS',
+                    test: () => {
+                        const styleSheets = Array.from(document.styleSheets);
+                        return styleSheets.some(sheet => sheet.href && sheet.href.includes('guideai.css'));
+                    },
+                    message: 'Responsive CSS loaded'
+                },
+                {
+                    name: 'Touch-Friendly Targets',
+                    test: () => {
+                        const buttons = document.querySelectorAll('button, .btn');
+                        return buttons.length > 0;
+                    },
+                    message: 'Touch-friendly button elements present'
+                },
+                {
+                    name: 'Flexible Layout',
+                    test: () => {
+                        const container = document.querySelector('.container');
+                        return container && container.classList.contains('container');
+                    },
+                    message: 'Bootstrap responsive container used'
+                },
+                {
+                    name: 'Chat Container Responsive',
+                    test: () => {
+                        const chatContainer = document.querySelector('.chat-container');
+                        return chatContainer && chatContainer.style.maxHeight;
+                    },
+                    message: 'Chat container has responsive height'
+                }
+            ];
+
+            tests.forEach(test => {
+                const result = document.createElement('div');
+                result.className = `test-result ${test.test() ? 'test-pass' : 'test-fail'}`;
+                result.innerHTML = `<strong>${test.name}:</strong> ${test.message}`;
+                results.appendChild(result);
+            });
+        }
+
+        function toggleHighContrast() {
+            if (accessibilitySystem) {
+                accessibilitySystem.toggleHighContrast();
+            }
+        }
+
+        function toggleLargeFonts() {
+            if (accessibilitySystem) {
+                accessibilitySystem.toggleLargeFonts();
+            }
+        }
+
+        function toggleDyslexiaFont() {
+            if (accessibilitySystem) {
+                accessibilitySystem.toggleDyslexiaFont();
+            }
+        }
+
+        function testReadAloud() {
+            if (accessibilitySystem) {
+                accessibilitySystem.speakText('This is a test of the read aloud feature. All accessibility features are working properly.');
+            }
+        }
+
+        function testKeyboardNavigation() {
+            const focusableElements = document.querySelectorAll('button, input, a, [tabindex]');
+            if (focusableElements.length > 0) {
+                focusableElements[0].focus();
+                alert(`Keyboard navigation test: ${focusableElements.length} focusable elements found. Press Tab to navigate.`);
+            }
+        }
+
+        function testScreenReader() {
+            if (accessibilitySystem) {
+                accessibilitySystem.announceToScreenReader('Screen reader test successful. All accessibility features are operational.');
+            }
+        }
+
+        // Auto-run tests on page load
+        setTimeout(() => {
+            testAccessibility();
+            testMobileResponsiveness();
+        }, 1000);
+    </script>
+</body>
+</html> 

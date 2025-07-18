@@ -1,0 +1,94 @@
+# Safe .htaccess - Basic security with URL rewriting for API
+# This version adds clean URL support while maintaining security
+
+# Set proper MIME types
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/css .css
+    AddType image/svg+xml .svg
+    AddType application/json .json
+</IfModule>
+
+# Basic security: Prevent direct access to sensitive files
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.inc">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.log">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "*.bak">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files ".htaccess">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# URL Rewriting for clean API endpoints and page URLs
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Handle clean API URL: /api -> api.php (main API endpoint)
+    RewriteRule ^api/?$ api.php [L,QSA]
+    
+    # Handle specific API endpoints
+    RewriteRule ^api/gemini/?$ api/gemini.php [L,QSA]
+    RewriteRule ^api/tts/?$ api/tts.php [L,QSA]
+    
+    # Remove .php extension from URLs
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^([^\.]+)$ $1.php [NC,L]
+    
+    # Handle clean page URLs
+    RewriteRule ^about/?$ about.php [L,QSA]
+    RewriteRule ^contact/?$ contact.php [L,QSA]
+    RewriteRule ^roadmap/?$ roadmap.php [L,QSA]
+    
+    # Ensure index.php is served for root
+    RewriteRule ^$ index.php [L,QSA]
+</IfModule>
+
+# Optional: Enable compression for better performance
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+</IfModule>
+
+# Optional: Set cache headers for static files only
+<IfModule mod_expires.c>
+    ExpiresActive on
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType font/woff2 "access plus 1 month"
+</IfModule>
+
+# Basic security headers (optional)
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options SAMEORIGIN
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
