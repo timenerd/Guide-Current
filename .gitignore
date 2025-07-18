@@ -1,0 +1,121 @@
+# Dependencies
+/vendor/
+/node_modules/
+composer.lock
+package-lock.json
+yarn.lock
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*.local
+
+# Logs
+/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache directories
+/cache/
+/tmp/
+/temp/
+*.cache
+
+# Upload directories
+/uploads/
+/public/uploads/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+
+# Compiled files
+*.min.css
+*.min.js
+*.map
+
+# Build directories
+/build/
+/dist/
+/public/build/
+
+# Testing
+/coverage/
+.phpunit.result.cache
+/tests/coverage/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Configuration files with sensitive data
+config.php
+database.php
+*.config.php
+*.secret.php
+openai.secret.php
+claude.secret.php
+
+# Session files
+/sessions/
+*.sess
+
+# Error logs
+error_log
+access_log
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+
+# Database files
+*.sql
+*.sqlite
+*.db
+
+# Backup archives
+*.zip
+*.tar.gz
+*.rar
+
+# PHP specific
+*.php~
+*.php.bak
+php_errors.log
+
+# Composer
+composer.phar
+
+# PHPUnit
+.phpunit.cache/
+
+# Local development
+docker-compose.override.yml
+docker-compose.override.yaml 
